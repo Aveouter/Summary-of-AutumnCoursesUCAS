@@ -1,0 +1,10 @@
+version: '2.2'
+services:
+  novel-crawlers:
+    container_name: novel-crawler
+    image: datadi/novel-crawlers:latest
+    volumes:
+      - <path/to/files>:/data/files
+    ports:
+      - "10000:10000"
+    restart: unless-stopped
