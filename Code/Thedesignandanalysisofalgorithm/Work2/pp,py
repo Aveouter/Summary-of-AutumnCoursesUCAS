@@ -1,0 +1,35 @@
+import numpy as np
+
+
+def floyd_warshall(graph):
+    # 获取结点的数量
+    n = len(graph)
+
+    # 初始化距离矩阵，用于保存每对结点之间的最短路径
+    distance = np.copy(graph)
+
+    # Floyd-Warshall算法核心
+    for k in range(n):
+        for i in range(n):
+            for j in range(n):
+                if distance[i, k] + distance[k, j] < distance[i, j]:
+                    distance[i, j] = distance[i, k] + distance[k, j]
+
+    return distance
+
+
+# 例子：图的邻接矩阵表示
+graph = np.array([
+    [0, np.inf, np.inf, np.inf, -1, np.inf],
+    [1, 0, np.inf, 2, np.inf, np.inf],
+    [np.inf, 2, 0, np.inf, np.inf, -8],
+    [-4, np.inf, np.inf, 0, 3, np.inf],
+    [np.inf, 7, np.inf, np.inf, 0, np.inf],
+    [np.inf, 5, 10, np.inf, np.inf, 0]
+])
+
+result = floyd_warshall(graph)
+
+# 打印每对结点之间的最短路径
+print("每对结点之间的最短路径：")
+print(result)
